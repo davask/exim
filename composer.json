@@ -1,5 +1,5 @@
 {
-    "name" : "exim/corebundle",
+    "name" : "exim/core-bundle",
     "description" : "A core bundle for the eXim cms",
     "type" : "symfony-bundle",
     "authors" : [{
