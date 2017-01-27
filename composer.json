@@ -92,8 +92,6 @@
         "symfony/var-dumper": "^3.1"
     },
 
-    "minimum-stability": "stable",
-
     "autoload": {
         "psr-4": {
             "Application\\Sonata\\AdminBundle\\": "src/Application/Sonata/AdminBundle",
