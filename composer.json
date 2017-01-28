@@ -5,12 +5,15 @@
     "keywords": ["exim"],
     "homepage": "https://github.com/davask/EximCoreBundle",
     "license": "MIT",
+    "version": "1.0.0",
+
     "authors": [
         {
             "name": "David Asquiedge",
             "email": "contact@davaskweblimited.com"
         }
     ],
+
     "require": {
         "php": ">=5.3.3",
         "doctrine/data-fixtures": "1.1.1",
@@ -92,7 +95,7 @@
         "symfony/var-dumper": "^3.1"
     },
 
-    "minimum-stability": "RC",
+    "minimum-stability": "stable",
 
     "autoload": {
         "psr-4": {
