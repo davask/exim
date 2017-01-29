@@ -1,7 +1,7 @@
 {
     "name": "davask/exim",
     "type": "symfony-bundle",
-    "description": "eXim Project - a Sonata/Symfony CMS [not ready for prod]",
+    "description": "eXim Project - a Sonata/Symfony CMS project [not ready for prod]",
     "keywords": ["exim", "cms", "symfony2", "sonata-project"],
     "homepage": "https://github.com/davask/exim-cms",
     "license": "MIT",
