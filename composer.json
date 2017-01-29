@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Symfony Sonata EximCoreBundle",
     "keywords": ["exim"],
-    "homepage": "https://github.com/davask/EximCoreBundle",
+    "homepage": "https://github.com/davask/exim-cms",
     "license": "MIT",
     "version": "1.0.0",
 
@@ -94,8 +94,6 @@
         "symfony/phpunit-bridge": "2.7.*@dev",
         "symfony/var-dumper": "^3.1"
     },
-
-    "minimum-stability": "stable",
 
     "autoload": {
         "psr-4": {
