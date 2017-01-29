@@ -1,7 +1,7 @@
 {
     "name": "davask/exim",
     "type": "symfony-bundle",
-    "description": "Symfony Sonata EximCoreBundle",
+    "description": "eXim Project - a Sonata/Symfony CMS",
     "keywords": ["exim"],
     "homepage": "https://github.com/davask/exim-cms",
     "license": "MIT",
@@ -114,6 +114,21 @@
             "Dwl\\Exim\\AdminBundle\\": "src/AdminBundle"
         }
     },
+
+    "repositories" : [
+        {
+            "type" : "vcs",
+            "url" : "https://github.com/davask/SonataAdminBundle"
+        },
+        {
+            "type" : "vcs",
+            "url" : "https://github.com/davask/SonataBlockBundle"
+        },
+        {
+            "type" : "vcs",
+            "url" : "https://github.com/davask/SonataPageBundle"
+        }
+    ],
 
     "scripts": {
         "post-install-cmd": [
