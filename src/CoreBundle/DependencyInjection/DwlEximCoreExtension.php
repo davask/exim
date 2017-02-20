@@ -27,7 +27,7 @@ class DwlEximCoreExtension extends Extension implements PrependExtensionInterfac
     {
         $params = array ();
         $params['exim.theme.demo'] = false;
-        $params['exim.theme.name'] = 'exim';
+        $params['exim.theme.name'] = 'Exim';
         $params['exim.theme.assets.version.css'] = time();
         $params['exim.theme.assets.version.js'] = time();
         $params['exim.theme.assets.version.img'] = time();

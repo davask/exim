@@ -92,7 +92,7 @@ class LoadPageData extends AbstractFixture implements ContainerAwareInterface, O
         $header->addChildren($text = $blockManager->create());
 
         $text->setType('sonata.block.service.text');
-        $text->setSetting('content', '<div class="col-sm-3"><a href="/"><img src="/themes/lcdd/media/images/logo-header.png" alt="logo de la chaine du droit"></a></div>');
+        $text->setSetting('content', '<div class="col-sm-3"><a href="/"><img src="/themes/Lcdd/media/images/logo-header.png" alt="logo de la chaine du droit"></a></div>');
         $text->setPosition(1);
         $text->setEnabled(true);
         $text->setPage($global);

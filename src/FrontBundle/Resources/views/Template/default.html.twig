@@ -1,4 +1,4 @@
-{% extends '@theme/Template/global.html.twig' %}
+{% extends 'EximTheme'~theme.name~'FrontBundle:Template:global.html.twig' %}
 
 {% set lcddSearchUnsetPages = ['Home','search'] %}
 {% set lcddBreadcrumbUnsetPages = ['Home','search', 'dwl_lcdd_get_question'] %}
@@ -7,13 +7,13 @@
 {% block bodyClass %} base{% endblock %}
 
 {% block sonata_page_top_bar %}
-{% include "@theme/Block/_facebook_sdk.html.twig" %}
+{% include 'EximTheme'~theme.name~'FrontBundle:Block:_facebook_sdk.html.twig' %}
 {#% include "SonataSeoBundle:Block:_google_plus_sdk.html.twig" %#}
 {{ parent() }}
 {% endblock %}
 
 {% block sonata_page_container %}
-<nav class="navbar navbar-{{theme.name}}">
+<nav class="navbar navbar-{{ theme.name }}">
 
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -25,8 +25,8 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="{{ url('page_slug', { 'path': '/' }) }}">
-                <img src="/themes/{{theme.name}}/media/images/icon-full.png" height="40px" alt="logo de la chaine du droit" class="visible-xs visible-sm">
-                <img src="/themes/{{theme.name}}/media/images/logo-header.png" alt="logo de la chaine du droit" class="visible-md visible-lg">
+                <img src="/themes/{{ theme.name | default('Exim')  }}/media/images/icon-full.png" height="40px" alt="logo de la chaine du droit" class="visible-xs visible-sm">
+                <img src="/themes/{{ theme.name | default('Exim') }}/media/images/logo-header.png" alt="logo de la chaine du droit" class="visible-md visible-lg">
             </a>
         </div>
 

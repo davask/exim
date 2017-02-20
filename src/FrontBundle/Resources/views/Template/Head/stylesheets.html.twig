@@ -1,4 +1,4 @@
-{% include '@theme/sonata/page/head/stylesheets.html.twig' %}
+{% include 'EximTheme'~theme.name~'FrontBundle:sonata:page/head/stylesheets.html.twig' %}
 {%- if app.user and is_granted('ROLE_SUPER_ADMIN') %}
 <!-- exim exim_theme_styles -->
 {% endif %}
