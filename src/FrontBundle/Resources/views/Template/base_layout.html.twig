@@ -1,0 +1,82 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{% block sonata_page_html_tag %}
+<!DOCTYPE html>
+<html {{ sonata_seo_html_attributes() }}>
+{% endblock %}
+
+{% block sonata_page_head %}
+<head {{ sonata_seo_head_attributes() }}>
+
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+    {{ sonata_seo_title() }}
+    {{ sonata_seo_metadatas() }}
+    {#<base href="{{ url('page_slug', { 'path': '/' }) }}">#}
+
+    {% include 'EximTheme'~theme.name~'FrontBundle:Template:Head/favicon.html.twig' %}
+    {% include 'EximTheme'~theme.name~'FrontBundle:Template:Head/stylesheets.html.twig' %}
+
+</head>
+{% endblock %}
+
+{%- block sonata_page_body_tag -%}
+<body class="{{ theme.name }}">
+    {% include "EximTheme'~theme.name~'FrontBundle:Block:_facebook_sdk.html.twig" %}
+    {#% include "SonataSeoBundle:Block:_google_plus_sdk.html.twig" %#}
+{%- endblock -%}
+
+{% if app.user and is_granted('ROLE_SUPER_ADMIN') -%}
+<!-- exim sonata_page_top_bar -->
+{% endif %}
+{% block sonata_page_top_bar %}
+
+    {%- if app.user and is_granted('ROLE_SUPER_ADMIN') -%}
+    <!-- exim page_top_bar -->
+    {% endif %}
+    {% block page_top_bar %} {# Deprecated block #}
+        {% if sonata_page.isEditor or ( app.user and is_granted('ROLE_PREVIOUS_ADMIN') ) %}
+
+            {%- include 'EximTheme'~theme.name~'FrontBundle:Template/eader:inline_edition.html.twig' %}
+
+    <header class="row navbar" role="banner" {% include 'EximTheme'~theme.name~'FrontBundle:Template/eader:inline_edition.html.twig' with { 'part' : 'attribut' } %}>
+        <div class="container">
+            <ul class="nav navbar-nav">
+                {% include 'EximTheme'~theme.name~'FrontBundle:Template/eader:admin.html.twig' %}
+                {% include 'EximTheme'~theme.name~'FrontBundle:Template/eader:edition.html.twig' %}
+                {% include 'EximTheme'~theme.name~'FrontBundle:Template/eader:switch.html.twig' %}
+            </ul>
+        </div>
+    </header>
+
+        {% endif %}
+    {% endblock %}
+    {%- if app.user and is_granted('ROLE_SUPER_ADMIN') -%}
+    <!-- /exim-->
+{# exim space fix -#}
+    {% endif -%}
+{% endblock %}
+{% if app.user and is_granted('ROLE_SUPER_ADMIN') -%}
+<!-- /exim-->
+{%- endif %}
+
+{% block sonata_page_container %}
+    {% block page_container %}{% endblock %} {# Deprecated block #}
+{% endblock %}
+
+{% block sonata_page_asset_footer %}
+    {% block page_asset_footer %} {# Deprecated block #}
+        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Footer/javascripts.html.twig' %}
+        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Head/javascripts.html.twig' %}
+    {% endblock %}
+{% endblock %}
+
+</body>
+</html>

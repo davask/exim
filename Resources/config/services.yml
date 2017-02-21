@@ -1,4 +1,0 @@
-services:
-#    dwl_exim_core.example:
-#        class: Dwl\Exim\CoreBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,46 @@
+{% trans_default_domain "ApplicationSonataUserBundle" %}
+{% import "@ApplicationSonataUserBundle/Resources/views/macro.html.twig" as macro %}
+{% extends "ApplicationSonataUserBundle:Speaker:action.html.twig" %}
+
+{% block sonata_profile_content %}
+    {% sonata_template_box 'This is the speaker profile template. Feel free to override it.' %}
+
+    {% set has_center = false %}
+    {% for block in blocks %}
+        {% if block.position == 'center' %}
+            {% set has_center = true %}
+        {% endif %}
+    {% endfor %}
+
+<div class="row">
+    <div class="{% if has_center %}col-sm-4{% else %}col-sm-6{% endif %}">
+    {% for block in blocks %}
+        {% if block.position == 'left' %}
+        {{ sonata_block_render({ 'type': block.type, 'settings': block.settings}) }}
+        {% endif %}
+    {% endfor %}
+    </div>
+
+    {% if has_center %}
+    <div class="col-sm-4">
+        {% for block in blocks %}
+            {% if block.position == 'center' %}
+        {{ sonata_block_render({ 'type': block.type, 'settings': block.settings}) }}
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="{% if has_center %}col-sm-4{% else %}col-sm-6{% endif %}">
+    {% for block in blocks %}
+        {% if block.position == 'right' %}
+
+        {{ sonata_block_render({ 'type': block.type, 'settings': block.settings}) }}
+
+        {% endif %}
+    {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
+

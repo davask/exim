@@ -1,0 +1,3 @@
+{% for javascript in sonata_admin.adminPool.getOption('javascripts', []) %}
+    <script src="{{ asset(javascript) }}"></script>
+{% endfor %}

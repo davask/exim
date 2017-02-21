@@ -1,0 +1,7 @@
+{% if app.user and is_granted('ROLE_USER') %}
+    <li>
+        <a href="{{ path('sonata_admin_dashboard') }}">
+            {{ "header.sonata_admin_dashboard"|trans({}, 'SonataPageBundle') }}
+        </a>
+    </li>
+{% endif %}

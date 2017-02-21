@@ -1,0 +1,55 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{%- extends 'EximTheme'~theme.name~'AdminBundle:Settings:variables.html.twig' -%}
+{%- block theme -%}
+<!DOCTYPE html>
+<html {% block html_attributes %}class="no-js"{% endblock %}>
+    {% include 'EximTheme'~theme.name~'AdminBundle:Components:head.html.twig' %}
+
+    <body {% block body_attributes %}class="sonata-bc {{ theme.admin.skin | default('skin-black') }} fixed"{% endblock %}>
+
+    <div class="wrapper">
+
+        {% block sonata_header -%}
+        {% include 'EximTheme'~theme.name~'AdminBundle:Components:body_sonata_header.html.twig' %}
+        {%- endblock sonata_header %}
+
+        {% block sonata_wrapper %}
+            {% block sonata_left_side -%}
+            {% include 'EximTheme'~theme.name~'AdminBundle:Components:body_sonata_left_side.html.twig' %}
+            {%- endblock sonata_left_side %}
+
+            <div class="content-wrapper">
+                {% block sonata_page_content %}
+                    <section class="content-header">
+                        {% block sonata_page_content_header %}
+                            {% block sonata_page_content_nav -%}
+                            {% include 'EximTheme'~theme.name~'AdminBundle:Components:body_sonata_page_content_nav.html.twig' %}
+                            {%- endblock sonata_page_content_nav %}
+                        {% endblock sonata_page_content_header %}
+                    </section>
+
+                    <section class="content">
+                        {% block sonata_admin_content -%}
+                        {% include 'EximTheme'~theme.name~'AdminBundle:Components:body_sonata_admin_content.html.twig' %}
+                        {%- endblock sonata_admin_content %}
+                    </section>
+                {% endblock sonata_page_content %}
+            </div>
+        {% endblock sonata_wrapper %}
+    </div>
+
+    {% include 'EximTheme'~theme.name~'AdminBundle:Assets:exim_footer_javascript.html.twig' %}
+
+    </body>
+</html>
+{%- endblock -%}
+

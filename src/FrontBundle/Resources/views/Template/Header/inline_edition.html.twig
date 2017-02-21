@@ -1,0 +1,33 @@
+{% if is_granted('ROLE_EXIM_ADMIN') %}
+    {% if sonata_page.isEditor and sonata_page.isInlineEditionOn -%}
+        {%- if part is defined and part == 'attribut' -%}
+data-page-editor='{{ {
+    url: {
+        block_save_position: sonata_admin.objectUrl('sonata.page.admin.page', 'edit', page),
+        block_edit:          sonata_admin.url('sonata.page.admin.page|sonata.page.admin.block', 'edit', {'id': 'BLOCK_ID'})
+    }
+}|json_encode()|raw }}'
+        {%- else -%}
+            {%- if app.user and is_granted('ROLE_SUPER_ADMIN') -%}
+    <!-- exim sonata_page.isInlineEditionOn -->
+            {% endif -%}
+    <!-- CMS specific variables -->
+    <script>
+        jQuery(document).ready(function() {
+            Sonata.Page.init({
+                url: {
+                    block_save_position: '{{ sonata_admin.objectUrl('sonata.page.admin.page', 'edit', page) }}',
+                    block_edit:          '{{ sonata_admin.url('sonata.page.admin.page|sonata.page.admin.block', 'edit', {'id': 'BLOCK_ID'}) }}'
+                }
+            });
+        });
+    </script>
+            {% if app.user and is_granted('ROLE_SUPER_ADMIN') -%}
+    <!-- /exim-->
+            {% endif %}
+        {% endif %}
+    {%- endif %}
+    {%- if theme.demo -%}
+        {%- include "EximTheme'~theme.name~'FrontBundle:Block:demo.html.twig" %}
+    {%- endif %}
+{% endif %}

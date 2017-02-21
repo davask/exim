@@ -1,0 +1,15 @@
+{%- if app.user and is_granted('ROLE_SUPER_ADMIN') %}
+<!-- exim sonata_page_header_javascripts -->
+{% endif %}
+{% block sonata_page_header_javascripts %}
+    {%- block page_header_javascripts -%} {#- Deprecated block #}
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+{# exim space fix -#}
+    {% endblock %}
+{% endblock %}
+{% if app.user and is_granted('ROLE_SUPER_ADMIN') -%}
+<!-- /exim-->
+{% endif %}

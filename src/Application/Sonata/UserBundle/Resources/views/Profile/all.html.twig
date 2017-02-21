@@ -1,0 +1,14 @@
+{% import "@ApplicationSonataUserBundle/Resources/views/macro.html.twig" as macro %}
+<ul>
+{% for speaker in speakers %}
+    <li>
+        <a href="{{ path('lcdd_speaker_get', {'username': speaker.usernameCanonical }) }}">
+            {% if app.user is not null and app.user.usernameCanonical == speaker.usernameCanonical %}
+            <b>{{ macro.speakerName(speaker) }}</b> ( {{speaker.username}} )
+            {% else %}
+            {{ macro.speakerName(speaker) }} ( {{speaker.username}} )
+            {% endif %}
+        </a>
+    </li>
+{% endfor %}
+</ul>

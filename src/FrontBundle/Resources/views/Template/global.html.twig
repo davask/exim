@@ -1,0 +1,100 @@
+{%- extends 'EximTheme'~theme.name~'FrontBundle:Settings:variables.html.twig' -%}
+{%- block theme -%}
+<!DOCTYPE html>
+<html {{ sonata_seo_html_attributes() }}>
+    <head {{ sonata_seo_head_attributes() }}>
+        {{ sonata_seo_title() }}
+        {{ sonata_seo_metadatas() }}
+        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Head/favicon.html.twig' %}
+
+        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Head/stylesheets.html.twig' %}
+
+        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' with { bname: 'exim_page_header_stylesheets' } %}{% block exim_page_header_stylesheets '' %}{% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' %}
+
+        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Head/javascripts.html.twig' %}
+
+        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' with { bname: 'exim_page_header_javascripts' } %}{% block exim_page_header_javascripts '' %}{% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' %}
+
+    </head>
+
+    <body class="{{ theme.name }} {{ pageClass | default('npc') }} container-fluid{% block bodyClass %} global{% endblock %}">
+        <!--[if lt IE 9]>
+            <p class="row browserupgrade">Vous utilisez un navigateur <strong>obsol&egrave;te</strong>. Merci de le <a href="http://browsehappy.com/">mettre-&agrave;-jour</a> afin d'am&eacute;liorer votre experience.</p>
+        <![endif]-->
+
+    {% if app.user %}
+
+        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' with { bname: 'sonata_page_top_bar' } %}{% block sonata_page_top_bar %}
+
+        {% if sonata_page.isEditor or ( app.user and is_granted('ROLE_PREVIOUS_ADMIN') ) %}
+            {%- include 'EximTheme'~theme.name~'FrontBundle:Template:Header/inline_edition.html.twig' %}
+        {% endif %}
+
+        <header class="row navbar navbar-admin" role="banner" {% include 'EximTheme'~theme.name~'FrontBundle:Template:Header/inline_edition.html.twig' with { 'part' : 'attribut' } %}>
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#exim-navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">
+        {% if speaker is defined %}
+                    <a href="{{ path('lcdd_speaker_get', { 'username' : speaker.customer.user.username }) }}">
+                        {% media speaker.avatar, 'lcdd_icon' with { 'width': '16', 'height': '16' } %} <b>{{speaker.customer.user.username}}</b>
+                    </a>
+        {% else %}
+                    <a href="{{ path('lcdd_speaker_get', { 'username' : app.user.username }) }}">
+                        <i class="fa fa-home fa-fw" aria-hidden="true"></i> <b>{{app.user.username}}</b>
+                    </a>
+        {% endif %}
+                  </a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="exim-navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right text-center">
+                        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Header/admin.html.twig' %}
+                        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Header/edition.html.twig' %}
+                    </ul>
+                    <ul class="nav navbar-nav text-center">
+                        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Header/switch.html.twig' %}
+                        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Header/dashboard.html.twig' %}
+                        {% block exim_profile_action %}{% endblock %}
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </header>
+
+        {% endblock %}{% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' %}
+    {% endif %}
+
+        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' with { bname: 'sonata_page_container' } %}{% block sonata_page_container %}
+        {% endblock %}{% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' %}
+
+        <footer class="row text-center">
+            {% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' with { bname: 'footer' } %}{% block footer %}
+            {{ sonata_page_render_container('footer', 'global') }}
+            {% endblock %}{% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' %}
+
+        </footer>
+
+        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' with { bname: 'sonata_page_asset_footer' } %}{% block sonata_page_asset_footer %}
+
+        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Footer/javascripts.html.twig' %}
+
+        {% endblock %}{% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' %}
+        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' with { bname: 'exim_page_asset_footer' } %}{% block exim_page_asset_footer %}
+        {% endblock %}{% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' %}
+
+        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' with { bname: 'exim_page_footer_vendor_javascripts' } %}{% block exim_page_footer_vendor_javascripts %}
+        {% endblock %}{% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' %}
+        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' with { bname: 'exim_page_footer_javascripts' } %}{% block exim_page_footer_javascripts %}
+        {% endblock %}{% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' %}
+
+        {% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' with { bname: 'exim_page_scripts' } %}{% block exim_page_scripts '' %}{% include 'EximTheme'~theme.name~'FrontBundle:Template:Block/separator.html.twig' %}
+
+    </body>
+</html>
+{% endblock %}

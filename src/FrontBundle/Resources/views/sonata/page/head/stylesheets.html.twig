@@ -1,0 +1,15 @@
+{%- if app.user and is_granted('ROLE_SUPER_ADMIN') %}
+<!-- exim sonata_page_stylesheets -->
+{% endif %}
+{% block sonata_page_stylesheets %}
+    {%- block page_stylesheets -%} {#- Deprecated block -#}
+        {% for stylesheet in sonata_page.assets.stylesheets %}
+    <link rel="stylesheet" href="{{ asset(stylesheet) }}" media="all">
+{# exim space fix -#}
+        {% endfor %}
+    {% endblock %}
+{% endblock %}
+{% if app.user and is_granted('ROLE_SUPER_ADMIN') -%}
+<!-- /exim-->
+{% endif %}
+

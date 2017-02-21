@@ -1,0 +1,10 @@
+    {#- install favicon with http://realfavicongenerator.net/ in /web/assets/ directory -#}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/favicons/apple-touch-icon.png' | imagine_filter('src') }}?v={{theme.assets.version.img}}">
+    <link rel="icon" type="image/png" href="{{ '/favicons/favicon-32x32.png' | imagine_filter('src') }}?v={{theme.assets.version.img}}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ '/favicons/favicon-16x16.png' | imagine_filter('src') }}?v={{theme.assets.version.img}}" sizes="16x16">
+    <link rel="manifest" href="{{ theme.path.web ~'/media/favicons/manifest.json' }}?v={{theme.assets.version.img}}">
+    <link rel="mask-icon" href="{{ theme.path.web ~'/media/favicons/safari-pinned-tab.svg' }}?v={{theme.assets.version.img}}" color="#113f59">
+    <link rel="shortcut icon" href="{{ theme.path.web ~'/media/favicons/favicon.ico' }}?v={{theme.assets.version.img}}">
+    <meta name="msapplication-config" content="{{ theme.path.web ~'/media/favicons/browserconfig.xml' }}?v={{theme.assets.version.img}}">
+    <meta name="theme-color" content="#113f59">
+

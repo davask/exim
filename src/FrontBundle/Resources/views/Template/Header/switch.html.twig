@@ -1,0 +1,7 @@
+{% if app.user and is_granted('ROLE_PREVIOUS_ADMIN') -%}
+<li>
+    <a href="{{ url('page_slug', { 'path': '/', '_switch_user': '_exit'}) }}">
+        {{ "header.switch_user_exit"|trans({}, 'SonataPageBundle')}}
+    </a>
+</li>
+{% endif %}

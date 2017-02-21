@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Sonata\CustomerBundle\Entity\BaseCustomer" exclusion-policy="all" xml-root-name="customer">
+        <property name="title" type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="firstname" type="string" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="lastname" type="string" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="email" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="birthDate" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="birthPlace" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="phoneNumber" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="mobileNumber" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="faxNumber" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="locale" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="isFake" type="boolean" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="user" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="createdAt" type="DateTime" since-version="1.0" groups="sonata_api_read,sonata_search"/>
+        <property name="updatedAt" type="DateTime" since-version="1.0" groups="sonata_api_read,sonata_search"/>
+    </class>
+</serializer>

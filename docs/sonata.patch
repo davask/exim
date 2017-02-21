@@ -1,0 +1,235 @@
+~/files/vendor/sonata-project/admin-bundle ~/files
+diff --git a/Admin/Pool.php b/Admin/Pool.php
+index 63856d2..d8f69e8 100644
+--- a/Admin/Pool.php
++++ b/Admin/Pool.php
+@@ -194,6 +194,9 @@ class Pool
+         }
+
+         if (count($this->adminClasses[$class]) > 1) {
++            if (in_array($class, array("Sonata\PageBundle\Entity\Block","Application\Sonata\PageBundle\Entity\Block","AppBundle\Entity\Page\Block"))) {
++                return $this->getInstance("sonata.page.admin.block");
++            }
+             throw new \RuntimeException(sprintf('Unable to find a valid admin for the class: %s, there are too many registered: %s', $class, implode(',', $this->adminClasses[$class])));
+         }
+
+~/files
+~/files/vendor/sonata-project/block-bundle ~/files
+diff --git a/Block/Service/ContainerBlockService.php b/Block/Service/ContainerBlockService.php
+index 71efcce..2502a2c 100644
+--- a/Block/Service/ContainerBlockService.php
++++ b/Block/Service/ContainerBlockService.php
+@@ -31,6 +31,8 @@ class ContainerBlockService extends AbstractAdminBlockService
+     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
+     {
+         $formMapper->add('enabled');
++        $formMapper->add('page');
++        $formMapper->add('parent');
+
+         $formMapper->add('settings', 'sonata_type_immutable_array', array(
+             'keys' => array(
+@@ -41,12 +43,14 @@ class ContainerBlockService extends AbstractAdminBlockService
+             ),
+         ));
+
+-        $formMapper->add('children', 'sonata_type_collection', array(), array(
+-            'admin_code' => 'sonata.page.admin.block',
+-            'edit' => 'inline',
+-            'inline' => 'table',
+-            'sortable' => 'position',
+-        ));
++        if(!in_array($block->getType(), array("sonata.page.block.container", "sonata.block.service.container"))) {
++            $formMapper->add('children', 'sonata_type_collection', array(), array(
++                'admin_code' => 'sonata.page.admin.block',
++                'edit' => 'inline',
++                'inline' => 'table',
++                'sortable' => 'position',
++            ));
++        }
+     }
+
+     /**
+diff --git a/Block/Service/MenuBlockService.php b/Block/Service/MenuBlockService.php
+index b757455..69ffadc 100644
+--- a/Block/Service/MenuBlockService.php
++++ b/Block/Service/MenuBlockService.php
+@@ -112,6 +112,7 @@ class MenuBlockService extends AbstractAdminBlockService
+             'current_class' => 'active',
+             'first_class' => false,
+             'last_class' => false,
++            'leaf_class' => false,
+             'current_uri' => null,
+             'menu_class' => 'list-group',
+             'children_class' => 'list-group-item',
+@@ -142,6 +143,7 @@ class MenuBlockService extends AbstractAdminBlockService
+             array('current_class', 'text', array('required' => false)),
+             array('first_class', 'text', array('required' => false)),
+             array('last_class', 'text', array('required' => false)),
++            array('leaf_class', 'text', array('required' => false)),
+             array('menu_class', 'text', array('required' => false)),
+             array('children_class', 'text', array('required' => false)),
+             array('menu_template', 'text', array('required' => false)),
+@@ -175,6 +177,7 @@ class MenuBlockService extends AbstractAdminBlockService
+             'current_class' => 'currentClass',
+             'first_class' => 'firstClass',
+             'last_class' => 'lastClass',
++            'leaf_class' => 'leafClass',
+             'safe_labels' => 'allow_safe_labels',
+             'menu_template' => 'template',
+         );
+diff --git a/Resources/views/Block/block_side_menu_template.html.twig b/Resources/views/Block/block_side_menu_template.html.twig
+index 069c053..201d939 100644
+--- a/Resources/views/Block/block_side_menu_template.html.twig
++++ b/Resources/views/Block/block_side_menu_template.html.twig
+@@ -25,6 +25,8 @@ file that was distributed with this source code.
+     {% if item.displayed %}
+         {# building the class of the item #}
+         {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
++        {%- set classes = classes|merge(['btn']) %}
++        {%- set classes = classes|merge(['btn-link']) %}
+         {%- if matcher.isCurrent(item) %}
+             {%- set classes = classes|merge([options.currentClass]) %}
+         {%- elseif matcher.isAncestor(item, options.depth) %}
+~/files
+~/files/vendor/sonata-project/cache ~/files
+~/files
+~/files/vendor/sonata-project/cache-bundle ~/files
+~/files
+~/files/vendor/sonata-project/classification-bundle ~/files
+~/files
+~/files/vendor/sonata-project/comment-bundle ~/files
+~/files
+~/files/vendor/sonata-project/core-bundle ~/files
+~/files
+~/files/vendor/sonata-project/datagrid-bundle ~/files
+~/files
+~/files/vendor/sonata-project/doctrine-extensions ~/files
+~/files
+~/files/vendor/sonata-project/doctrine-orm-admin-bundle ~/files
+~/files
+~/files/vendor/sonata-project/easy-extends-bundle ~/files
+~/files
+~/files/vendor/sonata-project/ecommerce ~/files
+~/files
+~/files/vendor/sonata-project/exporter ~/files
+~/files
+~/files/vendor/sonata-project/formatter-bundle ~/files
+~/files
+~/files/vendor/sonata-project/google-authenticator ~/files
+~/files
+~/files/vendor/sonata-project/intl-bundle ~/files
+~/files
+~/files/vendor/sonata-project/media-bundle ~/files
+~/files
+~/files/vendor/sonata-project/news-bundle ~/files
+~/files
+~/files/vendor/sonata-project/notification-bundle ~/files
+~/files
+~/files/vendor/sonata-project/page-bundle ~/files
+diff --git a/Admin/BaseBlockAdmin.php b/Admin/BaseBlockAdmin.php
+index d3fbc74..b54188f 100644
+--- a/Admin/BaseBlockAdmin.php
++++ b/Admin/BaseBlockAdmin.php
+@@ -71,6 +71,10 @@ abstract class BaseBlockAdmin extends AbstractAdmin
+     {
+         $block = parent::getNewInstance();
+         $block->setType($this->getPersistentParameter('type'));
++        if(is_null($block->getType())) {
++            $block->setType('sonata.page.block.container');
++
++        }
+
+         return $this->loadBlockDefaults($block);
+     }
+diff --git a/Admin/BlockAdmin.php b/Admin/BlockAdmin.php
+index ce37f78..71b21a0 100644
+--- a/Admin/BlockAdmin.php
++++ b/Admin/BlockAdmin.php
+@@ -137,7 +137,8 @@ class BlockAdmin extends BaseBlockAdmin
+         $formMapper->end();
+
+         $isContainerRoot = $block && in_array($blockType, array('sonata.page.block.container', 'sonata.block.service.container')) && !$this->hasParentFieldDescription();
+-        $isStandardBlock = $block && !in_array($blockType, array('sonata.page.block.container', 'sonata.block.service.container')) && !$this->hasParentFieldDescription();
++        // $isStandardBlock = $block && !in_array($blockType, array('sonata.page.block.container', 'sonata.block.service.container')) && !$this->hasParentFieldDescription();
++        $isStandardBlock = true;
+
+         if ($isContainerRoot || $isStandardBlock) {
+             $formMapper->with('form.field_group_general', $generalGroupOptions);
+@@ -209,6 +210,7 @@ class BlockAdmin extends BaseBlockAdmin
+                 ->with('form.field_group_options', $optionsGroupOptions)
+                 ->add('type', 'sonata_block_service_choice', array(
+                         'context' => 'sonata_page_bundle',
++                        'include_containers' => true,
+                     ))
+                 ->add('enabled')
+                 ->add('position', 'integer')
+diff --git a/Controller/BlockAdminController.php b/Controller/BlockAdminController.php
+index eb6febd..4236a4a 100644
+--- a/Controller/BlockAdminController.php
++++ b/Controller/BlockAdminController.php
+@@ -88,7 +88,7 @@ class BlockAdminController extends Controller
+
+         if (!$parameters['type']) {
+             return $this->render('SonataPageBundle:BlockAdmin:select_type.html.twig', array(
+-                'services' => $this->get('sonata.block.manager')->getServicesByContext('sonata_page_bundle'),
++                'services' => $this->get('sonata.block.manager')->getServicesByContext('sonata_page_bundle', true),
+                 'base_template' => $this->getBaseTemplate(),
+                 'admin' => $this->admin,
+                 'action' => 'create',
+@@ -154,7 +154,7 @@ class BlockAdminController extends Controller
+             throw new PageNotFoundException('No parent found, unable to preview an orphan block');
+         }
+
+-        $blockServices = $this->get('sonata.block.manager')->getServicesByContext('sonata_page_bundle', false);
++        $blockServices = $this->get('sonata.block.manager')->getServicesByContext('sonata_page_bundle', true);
+
+         return $this->render('SonataPageBundle:BlockAdmin:compose_preview.html.twig', array(
+             'container' => $container,
+diff --git a/Controller/PageAdminController.php b/Controller/PageAdminController.php
+index 688203f..d87059d 100644
+--- a/Controller/PageAdminController.php
++++ b/Controller/PageAdminController.php
+@@ -238,7 +238,7 @@ class PageAdminController extends Controller
+             throw new NotFoundHttpException(sprintf('unable to find the block with id : %s', $id));
+         }
+
+-        $blockServices = $this->get('sonata.block.manager')->getServicesByContext('sonata_page_bundle', false);
++        $blockServices = $this->get('sonata.block.manager')->getServicesByContext('sonata_page_bundle', true);
+
+         // filter service using the template configuration
+         if ($page = $block->getPage()) {
+diff --git a/Resources/views/Block/block_core_children_pages.html.twig b/Resources/views/Block/block_core_children_pages.html.twig
+index 6840544..b62fb5b 100644
+--- a/Resources/views/Block/block_core_children_pages.html.twig
++++ b/Resources/views/Block/block_core_children_pages.html.twig
+@@ -18,7 +18,9 @@ file that was distributed with this source code.
+         <ul class="sonata-page-menu-chilren-list">
+             {% if page %}
+                 {% for child in page.children %}
++                    {% if child.token is defined %}
+                     <li class="sonata-page-menu-children-element"><a href="{{ path(child) }}" title="{{ child.name|escape }}">{{ child.name }}</a></li>
++                    {% endif %}
+                 {% endfor %}
+             {% endif %}
+         </ul>
+diff --git a/Resources/views/BlockAdmin/compose_preview.html.twig b/Resources/views/BlockAdmin/compose_preview.html.twig
+index 7099ec8..6eebac9 100644
+--- a/Resources/views/BlockAdmin/compose_preview.html.twig
++++ b/Resources/views/BlockAdmin/compose_preview.html.twig
+@@ -9,6 +9,7 @@
+     >
+         {% set service = attribute(blockServices, child.type) %}
+         <h4 class="page-composer__container__child__name">{{ child.name|default(service.name) }}</h4>
++        <div>[#{{child.id}}]</div>
+         {% if not service.blockMetadata.image %}
+             <i class="{{ service.blockMetadata.option('class') }}" ></i>
+         {% else %}
+~/files
+~/files/vendor/sonata-project/seo-bundle ~/files
+~/files
+~/files/vendor/sonata-project/sonata-composer ~/files
+~/files
+~/files/vendor/sonata-project/timeline-bundle ~/files
+~/files
+~/files/vendor/sonata-project/user-bundle ~/files
+~/files

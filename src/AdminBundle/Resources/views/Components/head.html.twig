@@ -1,0 +1,34 @@
+<head>
+    {% block meta_tags %}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="UTF-8">
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    {% endblock %}
+
+    {% include 'EximTheme'~theme.name~'FrontBundle:Template:Head/favicon.html.twig' %}
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ theme.path.web }}/assetic/admin.css?v={{theme.assets.version.css}}" media="all">
+        {% for stylesheet in sonata_admin.adminPool.getOption('stylesheets', []) %}
+                <link rel="stylesheet" href="{{ asset(stylesheet) }}?v={{theme.assets.version.css}}">
+        {% endfor %}
+    {% endblock %}
+
+    {% block javascripts %}
+        {% block sonata_javascript_config -%}
+        {% include 'EximTheme'~theme.name~'AdminBundle:Assets:head_sonata_javascript_config.html.twig' %}
+        {%- endblock %}
+
+        {% block sonata_javascript_pool -%}
+        {% include 'EximTheme'~theme.name~'AdminBundle:Assets:head_sonata_javascript_pool.html.twig' %}
+        {%- endblock %}
+
+        {% include 'EximTheme'~theme.name~'AdminBundle:Assets:head_locale.html.twig' %}
+    {% endblock %}
+
+    <title>
+    {% block sonata_head_title -%}
+        {% include 'EximTheme'~theme.name~'AdminBundle:Objects:head_sonata_head_title.html.twig' %}
+    {%- endblock %}
+    </title>
+</head>

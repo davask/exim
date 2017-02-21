@@ -1,0 +1,31 @@
+{% include 'EximTheme'~theme.name~'FrontBundle:sonata:page/head/stylesheets.html.twig' %}
+{%- if app.user and is_granted('ROLE_SUPER_ADMIN') %}
+<!-- exim exim_theme_styles -->
+{% endif %}
+{% block exim_theme_styles %}
+    {% for css in theme.assets.css.vendor %}
+    <link rel="stylesheet" href="{{css}}" media="all">
+    {% endfor %}
+{# exim space fix -#}
+<!-- exim extra styles -->
+    {% for css in theme.assets.css.extra %}
+    <link rel="stylesheet" href="{{ theme.path.web }}/assetic/{{css}}.css?v={{theme.assets.version.css}}{{ date().timestamp }}" media="all">
+    {% endfor %}
+{# exim space fix -#}
+{% endblock %}
+{% if app.user and is_granted('ROLE_SUPER_ADMIN') -%}
+<!-- /exim-->
+{% endif %}
+{%- if app.user and is_granted('ROLE_SUPER_ADMIN') %}
+<!-- exim page styles -->
+{% endif %}
+{% if page is defined %}
+    {%- if page.stylesheet is not empty -%}
+<style>
+    {{ page.stylesheet|raw }}
+</style>
+    {% endif %}
+{% endif %}
+{% if app.user and is_granted('ROLE_SUPER_ADMIN') -%}
+<!-- /exim-->
+{% endif %}

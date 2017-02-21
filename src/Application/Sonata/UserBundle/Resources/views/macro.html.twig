@@ -1,0 +1,3 @@
+{% macro speakerName(speaker) %}
+    {{- ((speaker.lastname ~ ' ' ~ speaker.firstname) | trim | default(speaker.username)) | trim | capitalize -}}
+{% endmacro %}

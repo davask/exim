@@ -1,0 +1,71 @@
+{% extends "@theme/Template/default.html.twig" %}
+{% block page_content %}
+<div class="body-content">
+
+    <h1 class="col-sm-12 text-center">{{ macro.speakerName(speaker) }}</h1>
+
+    <div class="col-sm-12">
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#a-propos" aria-controls="apropos" role="tab" data-toggle="tab">
+                Â propos (see description)
+            </a>
+        </li>
+        <li role="presentation">
+            <a href="#parcours" aria-controls="parcours" role="tab" data-toggle="tab">
+                Parcours
+            </a>
+        </li>
+        <li role="presentation">
+            <a href="#specialisations" aria-controls="specialisations" role="tab" data-toggle="tab">
+                Spécialisations
+            </a>
+        </li>
+        <li role="presentation">
+            <a href="#publications" aria-controls="publications" role="tab" data-toggle="tab">
+                Publications
+            </a>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="apropos">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus nibh id arcu ullamcorper tristique. Etiam laoreet blandit tellus at malesuada. Phasellus scelerisque luctus massa non bibendum. In eget leo volutpat, placerat enim sed, bibendum arcu. Curabitur sit amet dui in sapien euismod lobortis a vitae massa. Vivamus elit ex, auctor et viverra non, commodo vitae nibh.
+        </div>
+        <div role="tabpanel" class="tab-pane" id="parcours">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus nibh id arcu ullamcorper tristique. Etiam laoreet blandit tellus at malesuada. Phasellus scelerisque luctus massa non bibendum. In eget leo volutpat, placerat enim sed, bibendum arcu. Curabitur sit amet dui in sapien euismod lobortis a vitae massa. Vivamus elit ex, auctor et viverra non, commodo vitae nibh.
+        </div>
+        <div role="tabpanel" class="tab-pane" id="specialisations">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus nibh id arcu ullamcorper tristique. Etiam laoreet blandit tellus at malesuada. Phasellus scelerisque luctus massa non bibendum. In eget leo volutpat, placerat enim sed, bibendum arcu. Curabitur sit amet dui in sapien euismod lobortis a vitae massa. Vivamus elit ex, auctor et viverra non, commodo vitae nibh.
+        </div>
+        <div role="tabpanel" class="tab-pane" id="publications">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus nibh id arcu ullamcorper tristique. Etiam laoreet blandit tellus at malesuada. Phasellus scelerisque luctus massa non bibendum. In eget leo volutpat, placerat enim sed, bibendum arcu. Curabitur sit amet dui in sapien euismod lobortis a vitae massa. Vivamus elit ex, auctor et viverra non, commodo vitae nibh.
+        </div>
+      </div>
+
+    </div>
+        {#% block sonata_profile_menu %}
+            {{ sonata_block_render({'type': 'lcdd.speaker.block.menu'}, {'current_uri': app.request.requestUri}) }}
+        {% endblock %#}
+
+        {#% include 'SonataCoreBundle:FlashMessage:render.html.twig' %#}
+    <div class="col-xs-12 map">
+        <div id="map-canvas" style="height:250px;"></div>
+    </div>
+
+    <div class="col-xs-12">
+        {% block sonata_profile_content '' %}
+    </div>
+
+</div>
+{% endblock %}
+{% block exim_page_scripts %}
+    {% set gmapapikey = 'AIzaSyAbE9d8X2BvRbO3E_8tt9n84ewVejztclQ' %}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{gmapapikey}}&libraries=places" type="text/javascript"></script>
+    <script src="{{ asset('bundles/dwleximcore/vendor/google/maps/js/markers.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/dwleximcore/vendor/google/maps/js/styles.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/dwleximcore/vendor/google/maps/js/script.js') }}" type="text/javascript"></script>
+{% endblock %}

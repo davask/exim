@@ -1,0 +1,14 @@
+{%- set _preview              = block('preview') is defined ? block('preview') : null -%}
+{%- set _form                 = block('form') is defined ? block('form') : null -%}
+{%- set _show                 = block('show') is defined ? block('show') : null -%}
+{%- set _list_table           = block('list_table') is defined ? block('list_table') : null -%}
+{%- set _list_filters         = block('list_filters') is defined ? block('list_filters') : null -%}
+{%- set _tab_menu             = block('tab_menu') is defined ? block('tab_menu') : null -%}
+{%- set _content              = block('content') is defined ? block('content') : null -%}
+{%- set _title                = block('title') is defined ? block('title') : null -%}
+{%- set _breadcrumb           = block('breadcrumb') is defined ? block('breadcrumb') : null -%}
+{%- set _actions              = block('actions') is defined ? block('actions') : null -%}
+{%- set _navbar_title         = block('navbar_title') is defined ? block('navbar_title') : null -%}
+{%- set _list_filters_actions = block('list_filters_actions') is defined ? block('list_filters_actions') : null -%}
+{%- set locale = app.request.locale -%}
+{%- block theme -%}{% endblock %}

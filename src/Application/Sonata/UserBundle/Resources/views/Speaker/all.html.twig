@@ -1,0 +1,96 @@
+{% trans_default_domain "ApplicationSonataUserBundle" %}
+{% import "@ApplicationSonataUserBundle/Resources/views/macro.html.twig" as macro %}
+{% set showAll = true %}
+{% set activeCarousel = false %}
+{% set activeArrow = true %}
+{% set activeBullet = false %}
+{% set perSlide = 6 %}
+{% set slideclass = 'active' %}
+{% set slideindex = 0 %}
+{% set slideiconhtml = '<li data-target="#carousel-speaker" data-slide-to="' ~ slideindex ~ '" class="' ~ slideclass ~ '"></li>' %}
+{% set slidehtml %}
+<div class="clearfix item {{slideclass}}">
+    <ul class="list-inline text-center">
+{% endset %}
+
+{% for speaker in speakers %}
+
+    {% set slidehtml %}
+        {{slidehtml}}
+        <li class="speaker col-sm-2">
+            <a href="{{ path('lcdd_speaker_get', {'username': speaker.usernameCanonical }) }}">
+            <div>
+        {% if speaker.avatar %}
+                {% thumbnail speaker.avatar, 'small' with { 'class': 'img-responsive', 'width': '130px'} %}
+        {% else %}
+                <img title="avatar par defaut" alt="avatar par defaut" class="img-responsive" src="/themes/Lcdd/media/favicons/android-chrome-192x192.png">
+        {% endif %}
+            </div>
+            <p>
+                <b>{{ macro.speakerName(speaker) }}</b>
+            </p>
+            <p>
+                {{speaker.position.name | default('Intervenant') | capitalize}}
+            </p>
+            </a>
+        </li>
+    {% endset %}
+
+    {% if loop.index is divisible by(perSlide) %}
+        {% set slideindex = slideindex + 1 %}
+        {% if (speakers | length) > (slideindex * perSlide) %}
+            {% if not showAll and (slideindex > 0) %}
+                {% set slideclass = '' %}
+            {% endif %}
+            {% set slideiconhtml = slideiconhtml ~ '<li data-target="#carousel-speaker" data-slide-to="' ~ slideindex ~ '" class="' ~ slideclass ~ '"></li>' %}
+            {% set slidehtml %}
+                    {{slidehtml}}
+                </ul>
+            </div>
+            <div class="clearfix item {{slideclass}}">
+                <ul class="list-inline text-center">
+            {% endset %}
+        {% endif %}
+    {% endif %}
+
+{% endfor %}
+{% set slidehtml %}
+{{slidehtml}}
+</ul></div>
+{% endset %}
+
+<div class="content-media">
+    <div class="content-embed text-center">
+        <h1>{{'speaker_all_title'|trans|raw}}</h1>
+        <h2>{{'speaker_all_description'|trans|raw}}</h2>
+        <!--small>Trier les intervenants par catégorie d’intervention ></small-->
+    </div>
+    <div id="carousel-speaker" class="content-embed carousel slide">
+{% if not showAll and activeBullet and (speakers | length > perSlide) %}
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        {{slideiconhtml | raw}}
+      </ol>
+{% endif %}
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        {{slidehtml | raw}}
+      </div>
+
+{% if not showAll and activeArrow and (speakers | length > perSlide) %}
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-speaker" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Pr&ecaute;c&ecaute;dant</span>
+      </a>
+      <a class="right carousel-control" href="#carousel-speaker" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Suivant</span>
+      </a>
+{% endif %}
+    </div>
+{% if not showAll and activeCarousel %}
+<script type="text/javascript">$('.carousel').carousel();</script>
+{% endif %}
+</div>

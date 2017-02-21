@@ -1,0 +1,10 @@
+{%- if 'dwl_lcdd_get_' in page.name %}
+    {% set pageClass = page.name | replace({'dwl_lcdd_get_':''}) %}
+{% elseif 'fos_user_' in page.name %}
+    {% set pageClass = page.name | replace({'fos_user_':''}) %}
+{% elseif 'lcdd_speaker' in page.name %}
+    {% set pageClass = page.name | replace({'lcdd_':''}) %}
+{% else %}
+    {% set pageClass = '' %}
+{% endif -%}
+{%- block theme '' -%}

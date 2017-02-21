@@ -1,0 +1,82 @@
+fos_user_profile_show:
+    path: "/{username}.{_format}"
+    methods: "GET"
+    defaults:
+        _controller: ApplicationSonataUserBundle:ProfileFOSUser1:show
+        username: 'me'
+        _locale: fr
+        _format: '%exim.theme.front.format%'
+    requirements:
+        username: .+
+        _locale: fr
+        _format: html|json
+    options:
+        expose: true
+
+fos_user_profile_edit_authentication:
+    path: "/edit-authentication.{_format}"
+    defaults:
+        _controller: ApplicationSonataUserBundle:ProfileFOSUser1:editAuthentication
+        _locale: fr
+        _format: '%exim.theme.front.format%'
+    requirements:
+        _locale: fr
+        _format: html|json
+    options:
+        expose: true
+
+
+fos_user_profile_edit:
+    path: "/edit-profile.{_format}"
+    defaults:
+        _controller: ApplicationSonataUserBundle:ProfileFOSUser1:editProfile
+        _locale: fr
+        _format: '%exim.theme.front.format%'
+    requirements:
+        _locale: fr
+        _format: html|json
+    options:
+        expose: true
+
+
+sonata_user_profile_show:
+    path: "/{username}.{_format}"
+    methods: "GET"
+    defaults:
+        _controller: ApplicationSonataUserBundle:ProfileFOSUser1:show
+        username: 'me'
+        _locale: fr
+        _format: '%exim.theme.front.format%'
+    requirements:
+        username: .+
+        _locale: fr
+        _format: html|json
+    options:
+        expose: true
+
+
+sonata_user_profile_edit_authentication:
+    path: "/edit-authentication.{_format}"
+    defaults:
+        _controller: ApplicationSonataUserBundle:ProfileFOSUser1:editAuthentication
+        _locale: fr
+        _format: '%exim.theme.front.format%'
+    requirements:
+        _locale: fr
+        _format: html|json
+    options:
+        expose: true
+
+
+sonata_user_profile_edit:
+    path: "/edit-profile.{_format}"
+    defaults:
+        _controller: ApplicationSonataUserBundle:ProfileFOSUser1:editProfile
+        _locale: fr
+        _format: '%exim.theme.front.format%'
+    requirements:
+        _locale: fr
+        _format: html|json
+    options:
+        expose: true
+

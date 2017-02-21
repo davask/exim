@@ -1,0 +1,38 @@
+{%- if app.user and is_granted('ROLE_SUPER_ADMIN') %}
+<!-- exim sonata_page_javascripts -->
+{% endif %}
+
+{% for js in sonata_page.assets.javascripts %}
+    <script src="{{ asset(js) }}"></script>
+{% endfor %}
+
+{% block sonata_page_javascripts %}
+    {%- block page_javascripts -%} {#- Deprecated block -#}
+    {% endblock %}
+{% endblock %}
+
+<script type="text/javascript">
+    var basket_update_confirmation_message = "{{ 'sonata_basket_update_confirmation'|trans({}, 'SonataDemoBundle')|escape('js') }}";
+</script>
+
+{% if app.user and is_granted('ROLE_SUPER_ADMIN') -%}
+<!-- /exim-->
+{% endif %}
+{% if page is defined %}
+    {%- if page.stylesheet is not empty -%}
+<style>
+    {{ page.stylesheet|raw }}
+</style>
+    {% endif %}
+    {% if page.javascript is not empty %}
+<script>
+    {{ page.javascript|raw }}
+</script>
+    {% endif %}
+{% endif %}
+{#
+    These includes can be done only at this point as all blocks are loaded,
+    Limition : this does not work if a global page is loaded from an ESI tag inside a container block
+#}
+{{ sonata_block_include_javascripts('screen', app.request.basePath) }}
+{{ sonata_block_include_stylesheets('screen', app.request.basePath) }}
