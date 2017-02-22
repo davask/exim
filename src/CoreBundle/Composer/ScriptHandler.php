@@ -9,6 +9,13 @@
  * file that was distributed with this source code.
  */
 
+/*
+    add somewhere
+        cp -rdf web/themes/Exim web/themes/%exim.theme.name%
+        cp -rdf vendor/davask/exim/src/FrontBundle web/themes/%exim.theme.name%/src
+        cp -rdf vendor/davask/exim/src/AdminBundle web/themes/%exim.theme.name%/src
+*/
+
 namespace Sensio\Bundle\DistributionBundle\Composer;
 
 use Symfony\Component\ClassLoader\ClassCollectionLoader;
@@ -18,7 +25,7 @@ use Symfony\Component\Process\PhpExecutableFinder;
 use Composer\Script\Event;
 
 /**
- * @author Jordi Boggiano <j.boggiano@seld.be>
+ * @author David Asquiedge <contact@davaskweblimited.com>
  */
 class ScriptHandler
 {

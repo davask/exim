@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Exim\Theme\Lcdd\AdminBundle;
+namespace Exim\Theme\Exim\AdminBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class EximThemeLcddAdminBundle extends Bundle
+class EximThemeEximAdminBundle extends Bundle
 {
 }

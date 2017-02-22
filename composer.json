@@ -111,8 +111,8 @@
             "Application\\Sonata\\UserBundle\\": "src/Application/Sonata/UserBundle",
             "Dwl\\Exim\\CoreBundle\\": "src/CoreBundle",
             "Dwl\\Exim\\ThemeBundle\\": "src/ThemeBundle",
-            "Exim\\Theme\\Lcdd\\FrontBundle\\": "src/FrontBundle",
-            "Exim\\Theme\\Lcdd\\AdminBundle\\": "src/AdminBundle"
+            "Exim\\Theme\\Exim\\FrontBundle\\": "src/FrontBundle",
+            "Exim\\Theme\\Exim\\AdminBundle\\": "src/AdminBundle"
         }
     },
 

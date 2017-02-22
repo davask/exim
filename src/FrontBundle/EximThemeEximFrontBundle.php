@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Exim\Theme\Lcdd\FrontBundle;
+namespace Exim\Theme\Exim\FrontBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class EximThemeLcddFrontBundle extends Bundle
+class EximThemeEximFrontBundle extends Bundle
 {
 }
