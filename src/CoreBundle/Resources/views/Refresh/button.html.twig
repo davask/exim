@@ -1,10 +1,11 @@
 {% set ob_route = ob_route | default('ob_cache_nuke_clear') %}
 {% set ob_text = ob_text | default('cache clear') %}
+{% set ob_cli = ob_cli | default('app/console cache:clear') %}
 <link rel="stylesheet" href="{{ asset('bundles/dwleximcore/vendor/ladda/css/ladda.min.css') }}"/>
 
-<a class="ladda-button {{ob_route}}" data-color="red" data-style="slide-up" data-size="s" style="background-color:transparent;font-size:1em;border:none;line-height:20px;">
+<a class="ladda-button {{ob_route}}" data-color="red" data-style="slide-up" data-size="s" style="background-color:transparent;font-size:1em;border:none;line-height:20px;color:#ffffff;" title="{{ob_cli}}">
     <span class="ladda-label" style="font-size:1em;">{{ob_text}}</span>
-    <span class="ladda-spinner"></span>
+    <span class="ladda-spinner" style="color:#333333;"></span>
     <div class="ladda-progress" style="width: 0px;"></div>
 </a>
 

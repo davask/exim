@@ -22,3 +22,11 @@ if (substr( $_SERVER['PATH_INFO'], 0, 8 ) === '/refresh') {
 }
 
 ```
+
+to enable mysqldump from front :
+
+```shell
+    # activate ssh-keygen access to mysql server
+    ssh-keygen -t rsa -b 2048
+    ssh -p '$database_port_ssh' '$database_user@$database_host'
+```

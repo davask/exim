@@ -15,6 +15,7 @@
 
     "require": {
         "php": ">=5.3.3",
+        "ext-bcmath" : "*",
         "doctrine/data-fixtures": "1.1.1",
         "doctrine/dbal": "~2.4,<2.5",
         "doctrine/doctrine-bundle": "~1.5",
@@ -67,7 +68,7 @@
         "symfony/assetic-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3",
-        "symfony/symfony": "~2.7,>=2.7.2",
+        "symfony/symfony": "~2.7,>=2.7.2,<2.8.16",
         "twbs/bootstrap": "v3.0.0",
         "twig/extensions": "~1.0",
         "twig/twig": "^1.24",
@@ -109,8 +110,9 @@
             "Application\\Sonata\\ProductBundle\\": "src/Application/Sonata/ProductBundle",
             "Application\\Sonata\\UserBundle\\": "src/Application/Sonata/UserBundle",
             "Dwl\\Exim\\CoreBundle\\": "src/CoreBundle",
-            "Exim\\Theme\\Lcdd\\FrontBundle\\": "src/FrontBundle",
-            "Exim\\Theme\\Lcdd\\AdminBundle\\": "src/AdminBundle"
+            "Dwl\\Exim\\ThemeBundle\\": "src/ThemeBundle",
+            "Exim\\Theme\\Exim\\FrontBundle\\": "src/FrontBundle",
+            "Exim\\Theme\\Exim\\AdminBundle\\": "src/AdminBundle"
         }
     },
 

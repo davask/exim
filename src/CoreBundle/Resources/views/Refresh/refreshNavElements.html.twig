@@ -1,0 +1,30 @@
+{% if app.environment == 'dev' %}
+    {% if app.user and is_granted('ROLE_EXIM_ADMIN') %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Clear <span class="caret"></span></a>
+                    <ul class="dropdown-menu" style="background-color:#2d698d;">
+                        <li>
+                            {% include "DwlEximCoreBundle:Refresh:button.html.twig" with { 'ob_route': 'dwl_exim_core_refresh_sonata_cache_page_ucr', 'ob_text': 'Update routes', 'ob_cli': 'app/console sonata:page:update-core-routes --site=all' } %}
+                        </li>
+                        <li>
+                            {% include "DwlEximCoreBundle:Refresh:button.html.twig" with { 'ob_route': 'dwl_exim_core_refresh_sonata_cache_page_cs', 'ob_text': 'create snapshots', 'ob_cli': 'app/console sonata:page:create-snapshots --site=all' } %}
+                        </li>
+                        <li>
+                            {% include "DwlEximCoreBundle:Refresh:button.html.twig" with { 'ob_route': 'dwl_exim_core_refresh_sonata_cache_page_cus', 'ob_text': 'cleanup snapshots', 'ob_cli': 'sonata:page:cleanup-snapshots --site=all --keep-snapshots=5' } %}
+                        </li>
+                        <li>
+                            {% include "DwlEximCoreBundle:Refresh:button.html.twig" with { 'ob_route': 'dwl_exim_core_refresh_sonata_cache_flush', 'ob_text': 'cache flush', 'ob_cli': 'app/console sonata:cache:flush-all --env=dev' } %}
+                        </li>
+                        <li>
+                            {% include "DwlEximCoreBundle:Refresh:button.html.twig" with { 'ob_route': 'dwl_exim_core_refresh_assets', 'ob_text': 'refresh assets', 'ob_cli': 'app/console assets:install --symlink' } %}
+                        </li>
+                        <li>
+                            {% include "DwlEximCoreBundle:Refresh:button.html.twig" with { 'ob_route': 'dwl_exim_core_refresh_cache_clear', 'ob_text': 'cache clear', 'ob_cli': 'app/console cache:clear --env=dev' } %}
+                        </li>
+                        {#<li>
+                            {% include "DwlEximCoreBundle:Refresh:button.html.twig" with { 'ob_route': 'dwl_exim_core_dumpmysql', 'ob_text': 'dump db', 'ob_cli': 'app/console ' } %}
+                        </li>#}
+                    </ul>
+                </li>
+    {% endif %}
+{% endif %}

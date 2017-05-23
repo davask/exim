@@ -11,3 +11,43 @@ dwl_exim_core_private_src:
 dwl_exim_core_homepage:
     path:     /exim/{name}
     defaults: { _controller: DwlEximCoreBundle:Core:index }
+
+dwl_exim_core_refresh_cache_clear:
+    pattern:  /refresh-cache
+    defaults: { _controller: DwlEximCoreBundle:Refresh:nukeCacheClear }
+    options:
+        expose: true
+dwl_exim_core_refresh_sonata_cache_flush:
+    pattern:  /refresh-flush
+    defaults: { _controller: DwlEximCoreBundle:Refresh:sonataCacheFlush }
+    options:
+        expose: true
+dwl_exim_core_refresh_sonata_cache_page_cs:
+    pattern:  /refresh-page-create-snapshots
+    defaults: { _controller: DwlEximCoreBundle:Refresh:sonataPageCreateSnapshots }
+    options:
+        expose: true
+dwl_exim_core_refresh_sonata_cache_page_cus:
+    pattern:  /refresh-page-cleanup-snapshots
+    defaults: { _controller: DwlEximCoreBundle:Refresh:sonataPageCleanupSnapshots }
+    options:
+        expose: true
+
+dwl_exim_core_refresh_sonata_cache_page_ucr:
+    pattern:  /refresh-page-update-core-routes
+    defaults: { _controller: DwlEximCoreBundle:Refresh:sonataPageUpdateCoreRoutes }
+    options:
+        expose: true
+
+dwl_exim_core_refresh_assets:
+    pattern:  /refresh-assets
+    defaults: { _controller: DwlEximCoreBundle:Refresh:assetsInstall }
+    options:
+        expose: true
+
+# dwl_exim_core_dumpmysql:
+#     pattern:  /backup-mysql
+#     defaults: { _controller: DwlEximCoreBundle:Dump:mysqldump }
+#     options:
+#         expose: true
+

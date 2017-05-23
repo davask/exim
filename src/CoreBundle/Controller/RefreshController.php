@@ -75,21 +75,21 @@ class RefreshController extends Controller
 
     }
 
-    public function sonataPageCreateSnapshotsAction()
+    public function sonataCacheFlushAction()
     {
+
         $application = $this->getApplicationAction();
 
         $input = new ArrayInput(
             array(
-                'command' => 'sonata:page:create-snapshots',
-                '--site' => array('all'),
-                '--keep-snapshots' => 5,
+                'command' => 'sonata:cache:flush-all',
+                '--env' => 'dev',
             )
         );
 
         $response = $this->setResponseAction($application, $input);
 
-        return new Response('{"snapshots":"created"}');
+        return new Response('{"cache":"flushed"}');
 
     }
 
@@ -108,6 +108,58 @@ class RefreshController extends Controller
         $response = $this->setResponseAction($application, $input);
 
         return new Response('{"routes":"updated"}');
+    }
+
+    public function sonataPageCreateSnapshotsAction()
+    {
+        $application = $this->getApplicationAction();
+
+        $input = new ArrayInput(
+            array(
+                'command' => 'sonata:page:create-snapshots',
+                '--site' => array('all'),
+            )
+        );
+
+        $response = $this->setResponseAction($application, $input);
+
+        return new Response('{"snapshots":"created"}');
+
+    }
+
+    public function sonataPageCleanupSnapshotsAction()
+    {
+        $application = $this->getApplicationAction();
+
+        $input = new ArrayInput(
+            array(
+                'command' => 'sonata:page:cleanup-snapshots',
+                '--site' => array('all'),
+                '--keep-snapshots' => 5,
+            )
+        );
+
+        $response = $this->setResponseAction($application, $input);
+
+        return new Response('{"snapshots":"created"}');
+
+    }
+
+    public function assetsInstallAction()
+    {
+        $application = $this->getApplicationAction();
+
+        $input = new ArrayInput(
+            array(
+                'command' => 'assets:install',
+                '--symlink' => true,
+            )
+        );
+
+        $response = $this->setResponseAction($application, $input);
+
+        return new Response('{"assets":"refreshed"}');
+
     }
 
 }
