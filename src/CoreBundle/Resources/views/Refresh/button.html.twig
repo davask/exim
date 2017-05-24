@@ -19,7 +19,9 @@
 
         [].forEach.call(document.querySelectorAll('.ladda-button.{{ob_route}}'), function(el) {
             el.addEventListener('click', function() {
-                NProgress.start();
+                if ( typeof NProgress != 'undefined' ) {
+                    NProgress.start();
+                }
                 button.start();
 
                 var r = new XMLHttpRequest()
@@ -27,7 +29,9 @@
                 r.onreadystatechange = function() {
                     if (r.readyState != 4 || r.status != 200) return;
                     button.stop();
-                    NProgress.done();
+                    if ( typeof NProgress != 'undefined' ) {
+                        NProgress.done();
+                    }
                 }
                 r.send();
             });
